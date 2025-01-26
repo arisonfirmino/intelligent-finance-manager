@@ -9,9 +9,12 @@ const TransactionsSection = async () => {
 
   if (!user) return null;
 
-  const transactions = JSON.parse(
-    JSON.stringify([...user.incomes, ...user.expenses]),
-  );
+  const transactions = [...user.incomes, ...user.expenses].sort((a, b) => {
+    const dateComparison =
+      new Date(b.date).getTime() - new Date(a.date).getTime();
+    if (dateComparison !== 0) return dateComparison;
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  });
 
   return (
     <div className="w-full space-y-2.5">
@@ -19,7 +22,9 @@ const TransactionsSection = async () => {
         <ArrowRightLeftIcon size={16} />
         <p className="font-medium">Transações</p>
       </div>
-      <TransactionsList transactions={transactions} />
+      <TransactionsList
+        transactions={JSON.parse(JSON.stringify(transactions))}
+      />
     </div>
   );
 };
