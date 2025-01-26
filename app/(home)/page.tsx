@@ -1,13 +1,13 @@
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
-import { authOptions } from "@/app/lib/auth";
+import { getUserSession } from "@/app/helpers/fetchUserData";
+
+import Container from "@/app/components/container";
 
 const Home = async () => {
-  const session = await getServerSession(authOptions);
+  const user = getUserSession();
 
-  if (!session) redirect("/signin");
+  if (!user) return null;
 
-  return <>Hello world!</>;
+  return <Container>Hello world!</Container>;
 };
 
 export default Home;
