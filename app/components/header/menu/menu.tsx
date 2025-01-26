@@ -1,6 +1,21 @@
-import NavButton from "@/app/components/header/menu/nav-button";
-import { Button } from "@/app/components/ui/button";
+"use client";
+
+import { useState } from "react";
+
 import { cn } from "@/app/lib/utils";
+
+import NavButton from "@/app/components/header/menu/nav-button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/app/components/ui/dialog";
+import DialogTabs from "@/app/components/header/menu/dialog-tabs";
+import { Button } from "@/app/components/ui/button";
+
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 import {
   ArrowRightLeftIcon,
@@ -10,11 +25,15 @@ import {
   WalletCardsIcon,
 } from "lucide-react";
 
-const Manu = ({ userId }: { userId: string }) => {
+import { Bank } from "@prisma/client";
+
+const Menu = ({ banks }: { banks: Bank[] }) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   const pages = [
     { page: "Home", icon: <HomeIcon />, href: "/" },
-    { page: "Poupança", icon: <PiggyBankIcon />, href: `/savings/${userId}` },
-    { page: "Carteira", icon: <WalletCardsIcon />, href: `/wallet/${userId}` },
+    { page: "Poupança", icon: <PiggyBankIcon />, href: "/savings" },
+    { page: "Carteira", icon: <WalletCardsIcon />, href: "/wallet" },
   ];
 
   return (
@@ -23,9 +42,25 @@ const Manu = ({ userId }: { userId: string }) => {
         <NavButton key={page.href} page={page} />
       ))}
 
-      <Button size="icon" variant="nav">
-        <PlusIcon />
-      </Button>
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogTrigger asChild>
+          <Button size="icon" variant="nav">
+            <PlusIcon />
+          </Button>
+        </DialogTrigger>
+        <DialogContent>
+          <VisuallyHidden>
+            <DialogHeader>
+              <DialogTitle>Transaction/Bank</DialogTitle>
+            </DialogHeader>
+          </VisuallyHidden>
+
+          <DialogTabs
+            banks={banks}
+            closeDialog={() => setIsDialogOpen(false)}
+          />
+        </DialogContent>
+      </Dialog>
 
       <Button size="icon" variant="nav" className={cn("md:hidden")}>
         <ArrowRightLeftIcon />
@@ -34,4 +69,4 @@ const Manu = ({ userId }: { userId: string }) => {
   );
 };
 
-export default Manu;
+export default Menu;

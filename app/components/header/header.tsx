@@ -16,7 +16,7 @@ const Header = async () => {
       <div className="h-fit w-full rounded-xl border border-input bg-muted p-1 xl:w-auto">
         <div className="flex items-center justify-between rounded-xl border p-2.5 xl:flex-col xl:justify-normal xl:gap-20">
           <ProjectLogo size="hidden h-10 w-10 xl:h-14 xl:w-14 md:flex" />
-          <Menu userId={user.id} />
+          <Menu banks={JSON.parse(JSON.stringify(user.banks))} />
           <User user={user} />
         </div>
       </div>
