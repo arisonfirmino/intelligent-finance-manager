@@ -24,17 +24,11 @@ const DatePicker = ({ date, setDate }: DatePickerProps) => {
       <PopoverTrigger asChild>
         <Button
           type="button"
-          className={cn(
-            "w-full border border-input bg-muted",
-            !date && "border-red-600 text-red-600",
-          )}
+          variant="secondary"
+          className={cn("w-full border bg-muted", !date && "border-red-600")}
         >
           <CalendarIcon />
-          {date ? (
-            formatDate(date)
-          ) : (
-            <span className="uppercase">Selecione uma data</span>
-          )}
+          {date ? formatDate(date) : <span>Selecione uma data</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent>
