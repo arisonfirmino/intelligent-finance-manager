@@ -4,7 +4,9 @@ const Container = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="flex w-full flex-col items-center justify-center gap-5 p-5 xl:flex-row xl:items-start">
       <Header />
-      <div className="w-full max-w-2xl">{children}</div>
+      <div className="flex w-full max-w-2xl flex-col gap-5 md:flex-row">
+        {children}
+      </div>
     </main>
   );
 };

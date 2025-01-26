@@ -7,6 +7,7 @@ import {
   TabsContent,
 } from "@/app/components/ui/tabs";
 import TabsHeader from "@/app/components/header/menu/tabs-header";
+import TransactionForm from "@/app/components/transaction-form";
 import BankForm from "@/app/components/bank-form";
 
 import { Bank } from "@prisma/client";
@@ -31,6 +32,15 @@ const DialogTabs = ({ banks, closeDialog }: DialogTabsProps) => {
           description="Preencha os campos abaixo com as informações da transação para
               adicioná-la ao seu controle financeiro."
         />
+
+        {banks.length > 0 ? (
+          <TransactionForm banks={banks} closeDialog={closeDialog} />
+        ) : (
+          <p className="text-center text-sm text-muted-foreground">
+            Antes de adicionar uma nova transação, é necessário cadastrar pelo
+            menos um banco.
+          </p>
+        )}
       </TabsContent>
 
       <TabsContent value="bank" className={cn("space-y-5")}>

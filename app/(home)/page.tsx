@@ -5,6 +5,7 @@ import { getUserSession } from "@/app/helpers/fetchUserData";
 
 import Container from "@/app/components/container";
 import Balance from "@/app/(home)/components/balance";
+import TransactionsSection from "@/app/components/transaction/transactions-section";
 
 const Home = async () => {
   const session = await getServerSession(authOptions);
@@ -17,8 +18,12 @@ const Home = async () => {
 
   return (
     <Container>
-      <div>
+      <div className="w-full">
         <Balance user={JSON.parse(JSON.stringify(user))} />
+      </div>
+
+      <div className="hidden h-fit w-full rounded-lg border p-2.5 md:flex">
+        <TransactionsSection />
       </div>
     </Container>
   );

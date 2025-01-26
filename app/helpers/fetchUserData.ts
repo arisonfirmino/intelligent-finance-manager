@@ -13,8 +13,8 @@ export const getUserSession = async () => {
     },
     include: {
       banks: true,
-      incomes: true,
-      expenses: true,
+      incomes: { include: { bank: true } },
+      expenses: { include: { bank: true } },
     },
   });
 

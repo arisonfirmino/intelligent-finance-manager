@@ -21,3 +21,69 @@ export const findBank = async (bankId: string) => {
 
   return bank;
 };
+
+export const findTransaction = async (
+  transactionId: string,
+  type: "income" | "expense",
+) => {
+  if (!transactionId) return { error: "ID da transação não fornecido." };
+
+  const transaction =
+    type === "income"
+      ? await db.income.findUnique({ where: { id: transactionId } })
+      : await db.expense.findUnique({ where: { id: transactionId } });
+
+  if (!transaction) return { error: "Transação não encontrada." };
+
+  return transaction;
+};
+
+export const updateBalances = async (
+  userId: string,
+  bankId: string,
+  value: number,
+  type: "income" | "expense",
+) => {
+  const isIncome = type === "income";
+
+  await db.user.update({
+    where: { id: userId },
+    data: {
+      balance: isIncome ? { increment: value } : { decrement: value },
+      total_incomes: isIncome ? { increment: value } : undefined,
+      total_expenses: !isIncome ? { increment: value } : undefined,
+    },
+  });
+
+  await db.bank.update({
+    where: { id: bankId },
+    data: {
+      current_balance: isIncome ? { increment: value } : { decrement: value },
+    },
+  });
+};
+
+export const updateBalancesAfterDeletion = async (
+  userId: string,
+  bankId: string,
+  value: number,
+  type: "income" | "expense",
+) => {
+  const isIncome = type === "income";
+
+  await db.user.update({
+    where: { id: userId },
+    data: {
+      balance: isIncome ? { decrement: value } : { increment: value },
+      total_incomes: isIncome ? { decrement: value } : undefined,
+      total_expenses: !isIncome ? { decrement: value } : undefined,
+    },
+  });
+
+  await db.bank.update({
+    where: { id: bankId },
+    data: {
+      current_balance: isIncome ? { decrement: value } : { increment: value },
+    },
+  });
+};
