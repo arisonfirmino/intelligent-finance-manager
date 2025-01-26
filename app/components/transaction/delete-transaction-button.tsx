@@ -72,23 +72,20 @@ const DeleteTransactionButton = ({
 
         <AlertDialogFooter>
           <AlertDialogCancel asChild>
-            <Button>Cancelar</Button>
+            <Button variant="outline" className={cn("uppercase")}>
+              Cancelar
+            </Button>
           </AlertDialogCancel>
 
           <AlertDialogAction asChild>
             <Button
               disabled={isLoading}
               onClick={handleDeleteClick}
-              size="icon"
               className={cn(
-                "border-none bg-red-600 text-white hover:bg-secondary hover:text-muted-foreground",
+                "border-none bg-red-600 uppercase text-white hover:bg-secondary hover:text-muted-foreground",
               )}
             >
-              {isLoading ? (
-                <LoaderCircleIcon className="animate-spin" />
-              ) : (
-                <Trash2Icon />
-              )}
+              Confirmar
             </Button>
           </AlertDialogAction>
         </AlertDialogFooter>
