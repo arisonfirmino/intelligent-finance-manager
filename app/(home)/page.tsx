@@ -4,6 +4,7 @@ import { authOptions } from "@/app/lib/auth";
 import { getUserSession } from "@/app/helpers/fetchUserData";
 
 import Container from "@/app/components/container";
+import Balance from "@/app/(home)/components/balance";
 
 const Home = async () => {
   const session = await getServerSession(authOptions);
@@ -14,7 +15,13 @@ const Home = async () => {
 
   if (!user) return null;
 
-  return <Container>Hello world!</Container>;
+  return (
+    <Container>
+      <div>
+        <Balance user={JSON.parse(JSON.stringify(user))} />
+      </div>
+    </Container>
+  );
 };
 
 export default Home;

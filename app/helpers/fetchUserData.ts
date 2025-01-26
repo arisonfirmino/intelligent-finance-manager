@@ -11,6 +11,11 @@ export const getUserSession = async () => {
     where: {
       id: session.user.id,
     },
+    include: {
+      banks: true,
+      incomes: true,
+      expenses: true,
+    },
   });
 
   return user;
