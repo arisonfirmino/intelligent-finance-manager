@@ -13,7 +13,7 @@ interface TransactionsListProps {
 }
 
 const TransactionsList = ({ transactions }: TransactionsListProps) => {
-  return (
+  return transactions.length > 0 ? (
     <ul className="w-full space-y-2.5">
       {transactions.map((transaction) => (
         <li key={transaction.id}>
@@ -21,6 +21,10 @@ const TransactionsList = ({ transactions }: TransactionsListProps) => {
         </li>
       ))}
     </ul>
+  ) : (
+    <p className="text-center text-sm text-muted-foreground">
+      Nenhuma transação registrada até agora. Adicione sua primeira transação!
+    </p>
   );
 };
 
