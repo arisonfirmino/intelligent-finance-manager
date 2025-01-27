@@ -6,6 +6,7 @@ import { getUserSession } from "@/app/helpers/fetchUserData";
 import Container from "@/app/components/container";
 import Balance from "@/app/(home)/components/balance/balance";
 import TotalAmount from "@/app/(home)/components/totals/total-amount";
+import TransactionsChart from "@/app/(home)/components/transactions-chart";
 import TransactionsList from "@/app/components/transaction/transactions-list";
 
 const Home = async () => {
@@ -41,6 +42,12 @@ const Home = async () => {
             banks={JSON.parse(JSON.stringify(user.banks))}
           />
         </div>
+
+        {transactions.length > 0 && (
+          <TransactionsChart
+            transactions={JSON.parse(JSON.stringify(transactions))}
+          />
+        )}
       </div>
       <TransactionsList
         transactions={JSON.parse(JSON.stringify(transactions))}
