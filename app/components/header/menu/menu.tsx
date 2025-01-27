@@ -1,7 +1,6 @@
 import NavButton from "@/app/components/header/menu/nav-button";
 
 import TransactionDialog from "@/app/components/header/menu/transaction-dialog";
-import LateralMenu from "@/app/components/header/menu/lateral-menu";
 
 import { HomeIcon, PiggyBankIcon, WalletCardsIcon } from "lucide-react";
 
@@ -21,10 +20,6 @@ const Menu = ({ banks }: { banks: Bank[] }) => {
       ))}
 
       <TransactionDialog banks={banks} />
-
-      <div className="md:hidden">
-        <LateralMenu />
-      </div>
     </nav>
   );
 };

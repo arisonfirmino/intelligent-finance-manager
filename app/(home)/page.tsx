@@ -5,7 +5,7 @@ import { getUserSession } from "@/app/helpers/fetchUserData";
 
 import Container from "@/app/components/container";
 import Balance from "@/app/(home)/components/balance";
-import TransactionsSection from "@/app/components/transaction/transactions-section";
+import TransactionsList from "@/app/components/transaction/transactions-list";
 
 const Home = async () => {
   const session = await getServerSession(authOptions);
@@ -16,15 +16,21 @@ const Home = async () => {
 
   if (!user) return null;
 
+  const transactions = [...user.incomes, ...user.expenses].sort((a, b) => {
+    const dateComparison =
+      new Date(b.date).getTime() - new Date(a.date).getTime();
+    if (dateComparison !== 0) return dateComparison;
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  });
+
   return (
     <Container>
       <div className="w-full">
         <Balance user={JSON.parse(JSON.stringify(user))} />
       </div>
-
-      <div className="hidden h-fit w-full rounded-lg border p-2.5 md:flex">
-        <TransactionsSection />
-      </div>
+      <TransactionsList
+        transactions={JSON.parse(JSON.stringify(transactions))}
+      />
     </Container>
   );
 };
