@@ -59,6 +59,8 @@ export const updateBalances = async (
     where: { id: bankId },
     data: {
       current_balance: isIncome ? { increment: value } : { decrement: value },
+      total_incomes: isIncome ? { increment: value } : undefined,
+      total_expenses: !isIncome ? { increment: value } : undefined,
     },
   });
 };
@@ -84,6 +86,8 @@ export const updateBalancesAfterDeletion = async (
     where: { id: bankId },
     data: {
       current_balance: isIncome ? { decrement: value } : { increment: value },
+      total_incomes: isIncome ? { decrement: value } : undefined,
+      total_expenses: !isIncome ? { decrement: value } : undefined,
     },
   });
 };
