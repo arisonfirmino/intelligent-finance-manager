@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/app/components/ui/card";
-import BankDetails from "@/app/(home)/components/bank-details";
+import BankDetails from "@/app/(home)/components/balance/bank-details";
 
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 

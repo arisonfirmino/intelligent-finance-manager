@@ -6,7 +6,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/app/components/ui/accordion";
-import BankDetailsItem from "@/app/(home)/components/bank-details-item";
+import BankDetailsItem from "@/app/(home)/components/balance/bank-details-item";
 
 import { Bank } from "@prisma/client";
 
