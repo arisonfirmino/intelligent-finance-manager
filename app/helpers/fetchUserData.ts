@@ -12,7 +12,11 @@ export const getUserSession = async () => {
       id: session.user.id,
     },
     include: {
-      banks: true,
+      banks: {
+        orderBy: {
+          name: "desc",
+        },
+      },
       incomes: { include: { bank: true } },
       expenses: { include: { bank: true } },
     },
