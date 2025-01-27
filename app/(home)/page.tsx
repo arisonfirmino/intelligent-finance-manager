@@ -5,6 +5,7 @@ import { getUserSession } from "@/app/helpers/fetchUserData";
 
 import Container from "@/app/components/container";
 import Balance from "@/app/(home)/components/balance/balance";
+import BanksList from "@/app/(home)/components/bank/banks-list";
 import TotalAmount from "@/app/(home)/components/totals/total-amount";
 import TransactionsChart from "@/app/(home)/components/transactions-chart";
 import TransactionsList from "@/app/components/transaction/transactions-list";
@@ -30,6 +31,14 @@ const Home = async () => {
       <div className="w-full space-y-5">
         <Balance user={JSON.parse(JSON.stringify(user))} />
 
+        {user.banks.length > 0 ? (
+          <BanksList banks={JSON.parse(JSON.stringify(user.banks))} />
+        ) : (
+          <p className="text-center text-sm text-muted-foreground">
+            Você ainda não adicionou bancos.
+          </p>
+        )}
+
         <div className="flex gap-5">
           <TotalAmount
             type="income"
@@ -49,6 +58,7 @@ const Home = async () => {
           />
         )}
       </div>
+
       <TransactionsList
         transactions={JSON.parse(JSON.stringify(transactions))}
       />
