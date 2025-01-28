@@ -40,9 +40,11 @@ const TotalAmount = ({ type, value, banks }: TotalAmountProps) => {
         <p className="font-semibold">{formatCurrency(value)}</p>
       </CardHeader>
 
-      <CardFooter>
-        <TotalAmountDetails type={type} banks={banks} />
-      </CardFooter>
+      {banks.length > 0 && (
+        <CardFooter>
+          <TotalAmountDetails type={type} banks={banks} />
+        </CardFooter>
+      )}
     </Card>
   );
 };
