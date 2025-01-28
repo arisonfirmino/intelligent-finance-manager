@@ -1,4 +1,4 @@
-import BankLogo from "@/app/components/bank-logo";
+import BankLogo from "@/app/components/bank/bank-logo";
 
 import { formatCurrency } from "@/app/helpers/formatCurrency";
 

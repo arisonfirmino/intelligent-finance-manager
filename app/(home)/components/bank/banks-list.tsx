@@ -13,7 +13,7 @@ import {
   CarouselNext,
 } from "@/app/components/ui/carousel";
 import { Button } from "@/app/components/ui/button";
-import BankLogo from "@/app/components/bank-logo";
+import BankLogo from "@/app/components/bank/bank-logo";
 
 import { Bank } from "@prisma/client";
 

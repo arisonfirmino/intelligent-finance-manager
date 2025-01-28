@@ -12,14 +12,17 @@ interface TransactionsListProps {
     | Prisma.ExpenseGetPayload<{
         include: { bank: true };
       }>[];
+  bank?: string;
 }
 
-const TransactionsList = ({ transactions }: TransactionsListProps) => {
+const TransactionsList = ({ transactions, bank }: TransactionsListProps) => {
   return (
     <div className="h-fit w-full space-y-2.5 rounded-lg border p-2.5">
       <div className="flex items-center gap-2.5">
         <ArrowRightLeftIcon size={16} />
-        <p className="font-medium">Transações</p>
+        <p className="truncate font-medium">
+          {bank ? `Transações ${bank}` : "Transações"}
+        </p>
       </div>
 
       {transactions.length > 0 ? (

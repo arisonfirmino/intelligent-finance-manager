@@ -8,7 +8,7 @@ import {
 } from "@/app/components/ui/accordion";
 
 import { Bank } from "@prisma/client";
-import BankLogo from "@/app/components/bank-logo";
+import BankLogo from "@/app/components/bank/bank-logo";
 import { formatCurrency } from "@/app/helpers/formatCurrency";
 
 const TotalAmountDetails = ({

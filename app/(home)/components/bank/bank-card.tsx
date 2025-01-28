@@ -1,8 +1,8 @@
 import { cn } from "@/app/lib/utils";
 
 import { Card, CardHeader, CardTitle } from "@/app/components/ui/card";
-import BankLogo from "@/app/components/bank-logo";
-import BankAmount from "@/app/(home)/components/bank/bank-amount";
+import BankLogo from "@/app/components/bank/bank-logo";
+import BankAmount from "@/app/components/bank/bank-amount";
 
 import { Bank } from "@prisma/client";
 

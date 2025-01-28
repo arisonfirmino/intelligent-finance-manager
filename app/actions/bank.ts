@@ -3,6 +3,8 @@
 import { db } from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 
+import { findUser, findBank } from "@/app/helpers/dbHelpers";
+
 interface AddBankProps {
   userId: string;
   name: string;
@@ -54,6 +56,44 @@ export const addBank = async ({
       },
     },
   });
+
+  revalidatePath("/");
+};
+
+export const deleteBank = async ({
+  userId,
+  bankId,
+}: {
+  userId: string;
+  bankId: string;
+}) => {
+  const user = await findUser(userId);
+  if ("error" in user) return user;
+
+  const bank = await findBank(bankId);
+  if ("error" in bank) return bank;
+
+  const { current_balance, total_incomes, total_expenses } = bank;
+
+  await db.income.deleteMany({ where: { bankId } });
+  await db.expense.deleteMany({ where: { bankId } });
+
+  await db.user.update({
+    where: { id: userId },
+    data: {
+      balance: {
+        decrement: current_balance,
+      },
+      total_incomes: {
+        decrement: total_incomes,
+      },
+      total_expenses: {
+        decrement: total_expenses,
+      },
+    },
+  });
+
+  await db.bank.delete({ where: { id: bankId } });
 
   revalidatePath("/");
 };
