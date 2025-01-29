@@ -10,13 +10,7 @@ const WalletPage = async () => {
 
   return (
     <Container>
-      {user.banks.length > 0 ? (
-        <WalletWrapper banks={JSON.parse(JSON.stringify(user.banks))} />
-      ) : (
-        <p className="text-center text-sm text-muted-foreground">
-          Você ainda não adicionou bancos.
-        </p>
-      )}
+      <WalletWrapper banks={JSON.parse(JSON.stringify(user.banks))} />
     </Container>
   );
 };
