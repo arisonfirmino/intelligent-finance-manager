@@ -6,11 +6,11 @@ import { HomeIcon, PiggyBankIcon, WalletCardsIcon } from "lucide-react";
 
 import { Bank } from "@prisma/client";
 
-const Menu = ({ banks }: { banks: Bank[] }) => {
+const Menu = ({ userId, banks }: { userId: string; banks: Bank[] }) => {
   const pages = [
     { page: "Home", icon: <HomeIcon />, href: "/" },
-    { page: "Poupança", icon: <PiggyBankIcon />, href: "/savings" },
-    { page: "Carteira", icon: <WalletCardsIcon />, href: "/wallet" },
+    { page: "Poupança", icon: <PiggyBankIcon />, href: `/savings/${userId}` },
+    { page: "Carteira", icon: <WalletCardsIcon />, href: `/wallet/${userId}` },
   ];
 
   return (
