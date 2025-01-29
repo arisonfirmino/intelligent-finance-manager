@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 import { authOptions } from "@/app/lib/auth";
-import { getUserSession } from "@/app/helpers/fetchUserData";
+import { redirect } from "next/navigation";
+import { db } from "@/app/lib/prisma";
 
 import Container from "@/app/components/container";
 import Balance from "@/app/(home)/components/balance/balance";
@@ -15,7 +15,14 @@ const Home = async () => {
 
   if (!session) redirect("/signin");
 
-  const user = await getUserSession();
+  const user = await db.user.findUnique({
+    where: { id: session.user.id },
+    include: {
+      banks: true,
+      incomes: { include: { bank: true } },
+      expenses: { include: { bank: true } },
+    },
+  });
 
   if (!user) return null;
 
