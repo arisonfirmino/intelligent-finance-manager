@@ -7,8 +7,8 @@ import {
   CardTitle,
 } from "@/app/components/ui/card";
 import BankLogo from "@/app/components/bank/bank-logo";
-import CardChip from "@/app/(pages)/wallet/components/card-chip";
-import BankTotalAmount from "@/app/(pages)/wallet/components/bank-total-amount";
+import CardChip from "@/app/(pages)/wallet/[id]/components/card-chip";
+import BankTotalAmount from "@/app/(pages)/wallet/[id]/components/bank-total-amount";
 import BankAmount from "@/app/components/bank/bank-amount";
 
 import { Bank } from "@prisma/client";

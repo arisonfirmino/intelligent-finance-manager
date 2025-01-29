@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { cn } from "@/app/lib/utils";
 
 import { Card } from "@/app/components/ui/card";
-import WalletBankCard from "@/app/(pages)/wallet/components/wallet-bank-card";
+import WalletBankCard from "@/app/(pages)/wallet/[id]/components/wallet-bank-card";
 import DeleteBankButton from "@/app/components/bank/delete-bank-button";
 import TransactionsList from "@/app/components/transaction/transactions-list";
 import { Button } from "@/app/components/ui/button";
