@@ -54,6 +54,9 @@ model User {
   incomes  Income[]
   expenses Expense[]
 
+  savings              Savings[]
+  savings_transactions SavingsTransaction[]
+
   @@map("users")
 }
 
@@ -107,4 +110,33 @@ model Expense {
   bankId String @map("bank_id")
 
   @@map("expenses")
+}
+
+model Savings {
+  id              String  @id @default(uuid())
+  goal            Decimal @db.Decimal(10, 2) @default(0.00)
+  current_balance Decimal @db.Decimal(10, 2) @default(0.00)
+
+  transactions SavingsTransaction[]
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @map("user_id")
+
+  @@map("savings")
+}
+
+model SavingsTransaction {
+  id         String   @id @default(uuid())
+  value      Decimal  @db.Decimal(10, 2)
+  type       String
+  date       DateTime
+  created_at DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @map("user_id")
+
+  savings   Savings @relation(fields: [savingsId], references: [id], onDelete: Cascade)
+  savingsId String  @map("savings_id")
+
+  @@map("savings_transactions")
 }

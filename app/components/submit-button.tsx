@@ -2,7 +2,13 @@ import { cn } from "@/app/lib/utils";
 
 import { Button } from "@/app/components/ui/button";
 
-const SubmitButton = ({ isLoading }: { isLoading: boolean }) => {
+const SubmitButton = ({
+  children,
+  isLoading,
+}: {
+  children: React.ReactNode;
+  isLoading: boolean;
+}) => {
   return (
     <Button
       type="submit"
@@ -11,7 +17,7 @@ const SubmitButton = ({ isLoading }: { isLoading: boolean }) => {
         "w-full border-none bg-primary text-white hover:bg-secondary hover:text-muted-foreground",
       )}
     >
-      {isLoading ? "Adicionando" : "Adicionar"}
+      {isLoading ? "Carregando" : children}
     </Button>
   );
 };

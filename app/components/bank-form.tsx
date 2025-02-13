@@ -130,7 +130,7 @@ const BankForm = ({
         )}
       />
 
-      <SubmitButton isLoading={isLoading} />
+      <SubmitButton isLoading={isLoading}>Adicionar</SubmitButton>
     </form>
   );
 };

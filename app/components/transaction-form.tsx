@@ -124,7 +124,7 @@ const TransactionForm = ({
 
       <DatePicker date={date} setDate={setDate} />
 
-      <SubmitButton isLoading={isLoading} />
+      <SubmitButton isLoading={isLoading}>Adicionar</SubmitButton>
     </form>
   );
 };
